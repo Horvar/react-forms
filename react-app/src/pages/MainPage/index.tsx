@@ -9,24 +9,24 @@ function MainPage() {
 
   return (
     <div>
-      <h1>Главная Страница</h1>
+      <h1>Main Page</h1>
       <nav>
         <ul>
-          <li><Link to="/uncontrolled-form">Неконтролируемая Форма</Link></li>
-          <li><Link to="/controlled-form">Контролируемая Форма (React Hook Form)</Link></li>
+          <li><Link to="/uncontrolled-form">Uncontrolled Form</Link></li>
+          <li><Link to="/controlled-form">Controlled Form (React Hook Form)</Link></li>
         </ul>
       </nav>
 
       {controlledFormData && (
         <div>
-          <h2>Данные из контролируемой формы:</h2>
+          <h2>Data from Controlled Form:</h2>
           <pre>{JSON.stringify(controlledFormData, null, 2)}</pre>
         </div>
       )}
 
       {uncontrolledFormData && (
         <div>
-          <h2>Данные из неконтролируемой формы:</h2>
+          <h2>Data from Uncontrolled Form:</h2>
           <pre>{JSON.stringify(uncontrolledFormData, null, 2)}</pre>
         </div>
       )}

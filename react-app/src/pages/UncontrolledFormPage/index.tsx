@@ -29,11 +29,11 @@ const UncontrolledFormPage: React.FC = () => {
     const file = event.target.files?.[0];
     if (file) {
       if (file.size > 10240) {
-        setImageError('Размер файла не должен превышать 10 КБ');
+        setImageError('File size should not exceed 10 KB');
         return;
       }
       if (!['image/png', 'image/jpeg'].includes(file.type)) {
-        setImageError('Допустимы только изображения в форматах PNG и JPEG');
+        setImageError('Only PNG and JPEG image formats are allowed');
         return;
       }
       setImageError('');
@@ -49,7 +49,7 @@ const UncontrolledFormPage: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (imageError) {
-      alert('Ошибка в изображении: ' + imageError);
+      alert('Image error: ' + imageError);
       return;
     }
     const formData = {
@@ -78,11 +78,11 @@ const UncontrolledFormPage: React.FC = () => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        <span>Имя:</span>
+        <span>Name:</span>
         <input ref={nameRef} type="text" />
       </label>
       <label>
-        <span>Возраст:</span>
+        <span>Age:</span>
         <input ref={ageRef} type="number" />
       </label>
       <label>
@@ -90,28 +90,28 @@ const UncontrolledFormPage: React.FC = () => {
         <input ref={emailRef} type="email" />
       </label>
       <label>
-        <span>Пароль:</span>
+        <span>Password:</span>
         <input ref={passwordRef} type="password" />
       </label>
       <label>
-        <span>Подтвердите Пароль:</span>
+        <span>Confirm Password:</span>
         <input ref={confirmPasswordRef} type="password" />
       </label>
       <label>
-        <span>Пол:</span>
+        <span>Gender:</span>
         <select ref={genderRef}>
-          <option value="male">Мужской</option>
-          <option value="female">Женский</option>
-          <option value="other">Другое</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
         </select>
       </label>
       <label>
-        <span>Согласие с условиями:</span>
+        <span>Agree to Terms:</span>
         <input ref={termsAcceptedRef} type="checkbox" />
       </label>
 
       <label>
-        <span>Страна:</span>
+        <span>Country:</span>
         <input list="countries-list" ref={countryRef} type="text" />
         <datalist id="countries-list">
           {countries.map((country, index) => (
@@ -121,7 +121,7 @@ const UncontrolledFormPage: React.FC = () => {
       </label>
 
       <label>
-        <span>Загрузите изображение:</span>
+        <span>Upload Image:</span>
         <input
           type="file"
           accept="image/png, image/jpeg"
@@ -129,7 +129,7 @@ const UncontrolledFormPage: React.FC = () => {
         />
         {imageError && <p>{imageError}</p>}
       </label>
-      <button type="submit">Отправить</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };

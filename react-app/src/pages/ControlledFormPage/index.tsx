@@ -40,11 +40,11 @@ const ControlledFormPage: React.FC = () => {
     const file = event.target.files?.[0];
     if (file) {
       if (file.size > 10240) {
-        setImageError('Размер файла не должен превышать 10 КБ');
+        setImageError('File size should not exceed 10 KB');
         return;
       }
       if (!['image/png', 'image/jpeg'].includes(file.type)) {
-        setImageError('Допустимы только изображения в форматах PNG и JPEG');
+        setImageError('Only PNG and JPEG image formats are allowed');
         return;
       }
       setImageError('');
@@ -59,7 +59,7 @@ const ControlledFormPage: React.FC = () => {
 
   const onSubmit = (data: FormData) => {
     if (imageError) {
-      alert('Ошибка в изображении: ' + imageError);
+      alert('Image error: ' + imageError);
       return;
     }
     const formData = {
@@ -73,12 +73,12 @@ const ControlledFormPage: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>
-        <span>Имя:</span>
+        <span>Name:</span>
         <input {...register('name')} type="text" />
         {errors.name && <p>{errors.name.message}</p>}
       </label>
       <label>
-        <span>Возраст:</span>
+        <span>Age:</span>
         <input {...register('age')} type="number" />
         {errors.age && <p>{errors.age.message}</p>}
       </label>
@@ -88,30 +88,30 @@ const ControlledFormPage: React.FC = () => {
         {errors.email && <p>{errors.email.message}</p>}
       </label>
       <label>
-        <span>Пароль:</span>
+        <span>Password:</span>
         <input {...register('password')} type="password" />
         {errors.password && <p>{errors.password.message}</p>}
       </label>
       <label>
-        <span>Подтвердите Пароль:</span>
+        <span>Confirm Password:</span>
         <input {...register('confirmPassword')} type="password" />
         {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
       </label>
       <label>
-        <span>Пол:</span>
+        <span>Gender:</span>
         <select {...register('gender')}>
-          <option value="male">Мужской</option>
-          <option value="female">Женский</option>
-          <option value="other">Другое</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
         </select>
       </label>
       <label>
-        <span>Согласие с условиями:</span>
+        <span>Agree to Terms:</span>
         <input {...register('termsAccepted')} type="checkbox" />
         {errors.termsAccepted && <p>{errors.termsAccepted.message}</p>}
       </label>
       <label>
-        <span>Страна:</span>
+        <span>Country:</span>
         <input {...register('country')} list="countries-list" type="text" />
         <datalist id="countries-list">
           {countries.map((country, index) => (
@@ -121,7 +121,7 @@ const ControlledFormPage: React.FC = () => {
         {errors.country && <p>{errors.country.message}</p>}
       </label>
       <label>
-        <span>Загрузите изображение:</span>
+        <span>Upload Image:</span>
         <input
           type="file"
           accept="image/png, image/jpeg"
@@ -129,7 +129,7 @@ const ControlledFormPage: React.FC = () => {
         />
         {imageError && <p>{imageError}</p>}
       </label>
-      <button type="submit">Отправить</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
