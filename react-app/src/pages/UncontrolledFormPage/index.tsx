@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { setUncontrolledFormData } from '../../store/formSlice';
 import { RootState } from '../../store/store';
@@ -9,6 +10,7 @@ import validationScheme from '../../validationScheme';
 
 const UncontrolledFormPage: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -65,6 +67,7 @@ const UncontrolledFormPage: React.FC = () => {
     try {
       await validationScheme.validate(formData, { abortEarly: false });
       dispatch(setUncontrolledFormData(formData));
+      navigate('/');
     } catch (error) {
       if (error instanceof yup.ValidationError) {
         console.log(error.errors);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -21,9 +22,10 @@ interface FormData {
 
 const ControlledFormPage: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const countries = useSelector(
     (state: RootState) => state.countries.countries,
-  ); // Получение списка стран
+  );
   const {
     register,
     handleSubmit,
@@ -65,6 +67,7 @@ const ControlledFormPage: React.FC = () => {
       picture: pictureBase64,
     };
     dispatch(setControlledFormData(formData));
+    navigate('/');
   };
 
   return (
