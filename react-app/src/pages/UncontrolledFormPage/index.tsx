@@ -16,10 +16,21 @@ const UncontrolledFormPage: React.FC = () => {
   const termsAcceptedRef = useRef<HTMLInputElement>(null);
   const countryRef = useRef<HTMLInputElement>(null);
   const [pictureBase64, setPictureBase64] = useState<string>('');
+  const [imageError, setImageError] = useState<string>('');
 
   const handlePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      if (file.size > 10240) {
+        setImageError('Размер файла не должен превышать 10 КБ');
+        return;
+      }
+      if (!['image/png', 'image/jpeg'].includes(file.type)) {
+        setImageError('Допустимы только изображения в форматах PNG и JPEG');
+        return;
+      }
+      setImageError('');
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setPictureBase64(reader.result as string);
@@ -30,6 +41,10 @@ const UncontrolledFormPage: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (imageError) {
+      alert("Ошибка в изображении: " + imageError);
+      return;
+    }
     const formData = {
       name: nameRef.current?.value ?? '',
       age: ageRef.current?.value ? parseInt(ageRef.current.value) : 0,
@@ -43,14 +58,11 @@ const UncontrolledFormPage: React.FC = () => {
     };
 
     try {
-      // Валидация данных формы
       await validationScheme.validate(formData, { abortEarly: false });
       dispatch(setUncontrolledFormData(formData));
-      // Обработка успешной отправки формы
     } catch (error) {
       if (error instanceof yup.ValidationError) {
-        // Обработка ошибок валидации
-        console.log(error.errors); // Вывод ошибок валидации
+        console.log(error.errors);
       }
     }
   };
@@ -96,6 +108,7 @@ const UncontrolledFormPage: React.FC = () => {
       <label>
         <span>Загрузите изображение:</span>
         <input type="file" accept="image/png, image/jpeg" onChange={handlePictureChange} />
+        {imageError && <p>{imageError}</p>}
       </label>
       <button type="submit">Отправить</button>
     </form>
