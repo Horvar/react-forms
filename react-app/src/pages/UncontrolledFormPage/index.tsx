@@ -2,6 +2,9 @@ import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUncontrolledFormData } from '../../store/formSlice';
 
+import * as yup from 'yup';
+import validationScheme from '../../validationScheme'
+
 const UncontrolledFormPage: React.FC = () => {
   const dispatch = useDispatch();
   const nameRef = useRef<HTMLInputElement>(null);
@@ -25,7 +28,7 @@ const UncontrolledFormPage: React.FC = () => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const formData = {
       name: nameRef.current?.value ?? '',
@@ -38,7 +41,18 @@ const UncontrolledFormPage: React.FC = () => {
       picture: pictureBase64,
       country: countryRef.current?.value ?? '',
     };
-    dispatch(setUncontrolledFormData(formData));
+
+    try {
+      // Валидация данных формы
+      await validationScheme.validate(formData, { abortEarly: false });
+      dispatch(setUncontrolledFormData(formData));
+      // Обработка успешной отправки формы
+    } catch (error) {
+      if (error instanceof yup.ValidationError) {
+        // Обработка ошибок валидации
+        console.log(error.errors); // Вывод ошибок валидации
+      }
+    }
   };
 
   return (
