@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch } from 'react-redux';
-import { setControlledFormData } from '../../store/formSlice';
 import validationScheme from '../../validationScheme';
+
+import { RootState } from '../../store/store';
+import { setControlledFormData } from '../../store/formSlice';
 
 interface FormData {
   name: string;
@@ -18,6 +21,7 @@ interface FormData {
 
 const ControlledFormPage: React.FC = () => {
   const dispatch = useDispatch();
+  const countries = useSelector((state: RootState) => state.countries.countries); // Получение списка стран
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(validationScheme)
   });
@@ -99,7 +103,12 @@ const ControlledFormPage: React.FC = () => {
       </label>
       <label>
         <span>Страна:</span>
-        <input {...register("country")} type="text" />
+        <input {...register("country")} list="countries-list" type="text" />
+        <datalist id="countries-list">
+          {countries.map((country, index) => (
+            <option key={index} value={country} />
+          ))}
+        </datalist>
         {errors.country && <p>{errors.country.message}</p>}
       </label>
       <label>

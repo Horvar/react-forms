@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { setUncontrolledFormData } from '../../store/formSlice';
+import { RootState } from '../../store/store';
 
 import * as yup from 'yup';
 import validationScheme from '../../validationScheme'
@@ -17,6 +19,7 @@ const UncontrolledFormPage: React.FC = () => {
   const countryRef = useRef<HTMLInputElement>(null);
   const [pictureBase64, setPictureBase64] = useState<string>('');
   const [imageError, setImageError] = useState<string>('');
+  const countries = useSelector((state: RootState) => state.countries.countries);
 
   const handlePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -101,10 +104,17 @@ const UncontrolledFormPage: React.FC = () => {
         <span>Согласие с условиями:</span>
         <input ref={termsAcceptedRef} type="checkbox" />
       </label>
+
       <label>
         <span>Страна:</span>
-        <input ref={countryRef} type="text" />
+        <input list="countries-list" ref={countryRef} type="text" />
+        <datalist id="countries-list">
+          {countries.map((country, index) => (
+            <option key={index} value={country} />
+          ))}
+        </datalist>
       </label>
+      
       <label>
         <span>Загрузите изображение:</span>
         <input type="file" accept="image/png, image/jpeg" onChange={handlePictureChange} />
