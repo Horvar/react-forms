@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 import { setControlledFormData } from '../../store/formSlice';
-import validationSchema from '../../validationScheme'; // Убедитесь, что путь к файлу схемы валидации верный
+import validationScheme from '../../validationScheme';
 
 interface FormData {
   name: string;
@@ -19,13 +19,24 @@ interface FormData {
 const ControlledFormPage: React.FC = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationScheme)
   });
   const [pictureBase64, setPictureBase64] = useState<string>('');
+  const [imageError, setImageError] = useState<string>('');
 
   const handlePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      if (file.size > 10240) {
+        setImageError('Размер файла не должен превышать 10 КБ');
+        return;
+      }
+      if (!['image/png', 'image/jpeg'].includes(file.type)) {
+        setImageError('Допустимы только изображения в форматах PNG и JPEG');
+        return;
+      }
+      setImageError('');
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setPictureBase64(reader.result as string);
@@ -35,6 +46,10 @@ const ControlledFormPage: React.FC = () => {
   };
 
   const onSubmit = (data: FormData) => {
+    if (imageError) {
+      alert("Ошибка в изображении: " + imageError);
+      return;
+    }
     const formData = {
       ...data,
       picture: pictureBase64
@@ -90,6 +105,7 @@ const ControlledFormPage: React.FC = () => {
       <label>
         <span>Загрузите изображение:</span>
         <input type="file" accept="image/png, image/jpeg" onChange={handlePictureChange} />
+        {imageError && <p>{imageError}</p>}
       </label>
       <button type="submit">Отправить</button>
     </form>
