@@ -105,7 +105,21 @@ body {
   display: flex;
   flex-direction: column;
   
-  gap: 1em;
+  gap: 1.5em;
+}
+
+.introFormError {
+  max-width: 75%;
+
+  position: absolute;
+  top: calc(1em + 2px);
+  right: 0;
+  transform: translateY(-100%);
+
+  font-size: .75em;
+  text-align: right;
+
+  color: rgb(255, 81, 81);
 }
 
 .introFormLabel {
@@ -155,6 +169,8 @@ body {
 }
 
 .introFormAgreeText {
+  max-width: 50%;
+
   font-size: .75em;
 
   color: #999;

@@ -3,35 +3,36 @@ import * as yup from 'yup';
 const validationScheme = yup.object({
   name: yup
     .string()
-    .required('Имя обязательно')
-    .matches(/^[A-ZА-Я]/, 'Имя должно начинаться с заглавной буквы'),
+    .required('Name is required')
+    .matches(/^[A-ZА-Я]/, 'Name must start with a capital letter'),
   age: yup
     .number()
-    .positive('Возраст должен быть положительным')
-    .integer('Возраст должен быть целым числом')
-    .required('Возраст обязателен'),
+    .transform(value => (isNaN(value) ? undefined : value))
+    .positive('Age must be positive')
+    .integer('Age must be an integer')
+    .required('Age is required'),
   email: yup
     .string()
-    .email('Неправильный формат email')
-    .required('Email обязателен'),
+    .email('Invalid email format')
+    .required('Email is required'),
   password: yup
     .string()
-    .min(8, 'Пароль должен быть не менее 8 символов')
+    .min(8, 'Password must be at least 8 characters')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'Пароль должен содержать как минимум одну цифру, одну прописную букву, одну строчную букву и один специальный символ',
+      'Password must contain at least one digit, one uppercase letter, one lowercase letter, and one special character',
     )
-    .required('Пароль обязателен'),
+    .required('Password is required'),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password')], 'Пароли должны совпадать')
-    .required('Подтверждение пароля обязательно'),
-  gender: yup.string().required('Пол обязателен'),
+    .oneOf([yup.ref('password')], 'Passwords must match')
+    .required('Password confirmation is required'),
+  gender: yup.string().required('Gender is required'),
   termsAccepted: yup
     .bool()
-    .required('Необходимо принять условия')
-    .oneOf([true], 'Необходимо принять условия'),
-  country: yup.string().required('Выбор страны обязателен'),
+    .required('You must accept the terms')
+    .oneOf([true], 'You must accept the terms'),
+  country: yup.string().required('Country selection is required'),
 });
 
 export default validationScheme;

@@ -79,27 +79,27 @@ const ControlledFormPage: React.FC = () => {
           <label className={styles.introFormLabel}>
             <span className={styles.introFormTitle}>Name:</span>
             <input {...register('name')} type="text" className={styles.introFormInput} />
-            {errors.name && <p>{errors.name.message}</p>}
+            {errors.name && <span className={styles.introFormError}>{errors.name.message}</span>}
           </label>
           <label className={styles.introFormLabel}>
             <span className={styles.introFormTitle}>Age:</span>
             <input {...register('age')} type="number" className={styles.introFormInput} />
-            {errors.age && <p>{errors.age.message}</p>}
+            {errors.age && <span className={styles.introFormError}>{errors.age.message}</span>}
           </label>
           <label className={styles.introFormLabel}>
             <span className={styles.introFormTitle}>Email:</span>
             <input {...register('email')} type="email" className={styles.introFormInput} />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && <span className={styles.introFormError}>{errors.email.message}</span>}
           </label>
           <label className={styles.introFormLabel}>
             <span className={styles.introFormTitle}>Password:</span>
             <input {...register('password')} type="password" className={styles.introFormInput} />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && <span className={styles.introFormError}>{errors.password.message}</span>}
           </label>
           <label className={styles.introFormLabel}>
             <span className={styles.introFormTitle}>Confirm Password:</span>
             <input {...register('confirmPassword')} type="password" className={styles.introFormInput} />
-            {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+            {errors.confirmPassword && <span className={styles.introFormError}>{errors.confirmPassword.message}</span>}
           </label>
           <label className={styles.introFormLabel}>
             <span className={styles.introFormTitle}>Gender:</span>
@@ -117,7 +117,7 @@ const ControlledFormPage: React.FC = () => {
                 <option key={index} value={country} />
               ))}
             </datalist>
-            {errors.country && <p>{errors.country.message}</p>}
+            {errors.country && <span className={styles.introFormError}>{errors.country.message}</span>}
           </label>
           <label className={styles.introFormLabel}>
             <span className={styles.introFormTitle}>Upload Image:</span>
@@ -126,12 +126,12 @@ const ControlledFormPage: React.FC = () => {
               accept="image/png, image/jpeg"
               onChange={handlePictureChange}
             />
-            {imageError && <p>{imageError}</p>}
+            {imageError && <span className={styles.introFormError}>{imageError}</span>}
           </label>
           <label className={styles.introFormLabel}>
             <input {...register('termsAccepted')} type="checkbox" className={styles.introFormCheckbox} />
             <span className={styles.introFormAgreeText}>I agree to the Terms and Conditions and the Privacy Policy</span>
-            {errors.termsAccepted && <p>{errors.termsAccepted.message}</p>}
+            {errors.termsAccepted && <span className={styles.introFormError}>{errors.termsAccepted.message}</span>}
           </label>
           <button type="submit" className={styles.introFormSubmit}>Submit</button>
         </form>
