@@ -8,6 +8,8 @@ import { RootState } from '../../store/store';
 import * as yup from 'yup';
 import validationScheme from '../../validationScheme';
 
+import styles from '../../index.module.css'
+
 const UncontrolledFormPage: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -76,61 +78,62 @@ const UncontrolledFormPage: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <span>Name:</span>
-        <input ref={nameRef} type="text" />
-      </label>
-      <label>
-        <span>Age:</span>
-        <input ref={ageRef} type="number" />
-      </label>
-      <label>
-        <span>Email:</span>
-        <input ref={emailRef} type="email" />
-      </label>
-      <label>
-        <span>Password:</span>
-        <input ref={passwordRef} type="password" />
-      </label>
-      <label>
-        <span>Confirm Password:</span>
-        <input ref={confirmPasswordRef} type="password" />
-      </label>
-      <label>
-        <span>Gender:</span>
-        <select ref={genderRef}>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-      </label>
-      <label>
-        <span>Agree to Terms:</span>
-        <input ref={termsAcceptedRef} type="checkbox" />
-      </label>
-
-      <label>
-        <span>Country:</span>
-        <input list="countries-list" ref={countryRef} type="text" />
-        <datalist id="countries-list">
-          {countries.map((country, index) => (
-            <option key={index} value={country} />
-          ))}
-        </datalist>
-      </label>
-
-      <label>
-        <span>Upload Image:</span>
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={handlePictureChange}
-        />
-        {imageError && <p>{imageError}</p>}
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+    <section className={styles.intro}>
+      <h1 className={styles.introTitle}>Uncontrolled Form</h1>
+        <form onSubmit={handleSubmit} className={styles.introForm}>
+          <label className={styles.introFormLabel}>
+            <span className={styles.introFormTitle}>Name:</span>
+            <input ref={nameRef} type="text" className={styles.introFormInput} />
+          </label>
+          <label className={styles.introFormLabel}>
+            <span className={styles.introFormTitle}>Age:</span>
+            <input ref={ageRef} type="number" className={styles.introFormInput} />
+          </label>
+          <label className={styles.introFormLabel}>
+            <span className={styles.introFormTitle}>Email:</span>
+            <input ref={emailRef} type="email" className={styles.introFormInput} />
+          </label>
+          <label className={styles.introFormLabel}>
+            <span className={styles.introFormTitle}>Password:</span>
+            <input ref={passwordRef} type="password" className={styles.introFormInput} />
+          </label>
+          <label className={styles.introFormLabel}>
+            <span className={styles.introFormTitle}>Confirm Password:</span>
+            <input ref={confirmPasswordRef} type="password" className={styles.introFormInput} />
+          </label>
+          <label className={styles.introFormLabel}>
+            <span className={styles.introFormTitle}>Gender:</span>
+            <select ref={genderRef} className={styles.introFormInput}>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label className={styles.introFormLabel}>
+            <span className={styles.introFormTitle}>Country:</span>
+            <input list="countries-list" ref={countryRef} type="text" className={styles.introFormInput} />
+            <datalist id="countries-list">
+              {countries.map((country, index) => (
+                <option key={index} value={country} />
+              ))}
+            </datalist>
+          </label>
+          <label className={styles.introFormLabel}>
+            <span className={styles.introFormTitle}>Upload Image:</span>
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={handlePictureChange}
+            />
+            {imageError && <p>{imageError}</p>}
+          </label>
+          <label className={styles.introFormLabel}>
+            <input ref={termsAcceptedRef} type="checkbox" className={styles.introFormCheckbox} />
+            <span className={styles.introFormAgreeText}>I agree to the Terms and Conditions and the Privacy Policy</span>
+          </label>
+          <button type="submit" className={styles.introFormSubmit}>Submit</button>
+        </form>
+    </section>
   );
 };
 

@@ -1,0 +1,171 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 16px;
+
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.intro {
+  padding: 4em;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.introTitle {
+  font-size: 4em;
+
+  margin: 0 0 1em;
+}
+
+.introWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.introWrapper + .introWrapper {
+  margin-top: 4em;
+}
+
+.introSubtitle {
+  font-size: 2em;
+
+  color: #666;
+
+  margin: 0 0 1em;
+}
+
+.introNav {}
+
+.introNavList {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+
+  list-style: none;
+}
+
+.introNavItem {
+  display: flex;
+  justify-content: center;
+}
+
+.introNavLink {
+  display: inline-block;
+
+  font-size: 1.25em;
+
+  color: darkcyan;
+}
+
+.introNavLink:hover {
+  text-decoration: none;
+}
+
+.introSuccess {
+  position: relative;
+
+  margin-top: -1px;
+}
+
+.introSuccessTitle,
+.introSuccessCode {
+  background: #f8f8f8;
+  border: 1px solid #999;
+}
+
+.introSuccessTitle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 1em;
+  color: #666;
+
+  padding: 0 .5em;
+}
+
+.introSuccessCode {
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+.introForm {
+  display: flex;
+  flex-direction: column;
+  
+  gap: 1em;
+}
+
+.introFormLabel {
+  max-width: 100%;
+  width: 420px;
+
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+
+  position: relative;
+}
+
+.introFormLabel:hover .introFormAgreeText {
+  color: #000;
+}
+
+.introFormTitle {
+  font-size: .75em;
+
+  color: #999;
+}
+
+.introFormInput,
+.introFormSubmit {
+  height: 2em;
+}
+
+.introFormInput {
+  border: 1px solid #999;
+
+  font-size: 1em;
+
+  padding: 0 1em;
+  box-sizing: border-box;
+}
+
+.introFormInput:focus {
+  border-color: #000;
+  outline: none;
+}
+
+.introFormCheckbox {
+  position: absolute;
+  top: calc(1em - 1px);
+  left: 0;
+}
+
+.introFormAgreeText {
+  font-size: .75em;
+
+  color: #999;
+
+  padding: 1em 2em;
+}
+
+.introFormSubmit {
+  border: 1px solid #000;
+
+  font: inherit;
+
+  cursor: pointer;
+}
