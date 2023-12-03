@@ -18,7 +18,9 @@ const validationScheme = yup.object({
   confirmPassword: yup.string()
     .oneOf([yup.ref('password')], 'Пароли должны совпадать')
     .required('Подтверждение пароля обязательно'),
+  gender: yup.string().required("Пол обязателен"),
   termsAccepted: yup.bool()
+    .required("Необходимо принять условия")
     .oneOf([true], "Необходимо принять условия"),
   country: yup.string()
     .required("Выбор страны обязателен"),
