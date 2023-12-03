@@ -5,7 +5,7 @@ import { setUncontrolledFormData } from '../../store/formSlice';
 import { RootState } from '../../store/store';
 
 import * as yup from 'yup';
-import validationScheme from '../../validationScheme'
+import validationScheme from '../../validationScheme';
 
 const UncontrolledFormPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,9 @@ const UncontrolledFormPage: React.FC = () => {
   const countryRef = useRef<HTMLInputElement>(null);
   const [pictureBase64, setPictureBase64] = useState<string>('');
   const [imageError, setImageError] = useState<string>('');
-  const countries = useSelector((state: RootState) => state.countries.countries);
+  const countries = useSelector(
+    (state: RootState) => state.countries.countries,
+  );
 
   const handlePictureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -45,7 +47,7 @@ const UncontrolledFormPage: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (imageError) {
-      alert("Ошибка в изображении: " + imageError);
+      alert('Ошибка в изображении: ' + imageError);
       return;
     }
     const formData = {
@@ -114,10 +116,14 @@ const UncontrolledFormPage: React.FC = () => {
           ))}
         </datalist>
       </label>
-      
+
       <label>
         <span>Загрузите изображение:</span>
-        <input type="file" accept="image/png, image/jpeg" onChange={handlePictureChange} />
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          onChange={handlePictureChange}
+        />
         {imageError && <p>{imageError}</p>}
       </label>
       <button type="submit">Отправить</button>

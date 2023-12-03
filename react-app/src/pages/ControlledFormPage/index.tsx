@@ -21,9 +21,15 @@ interface FormData {
 
 const ControlledFormPage: React.FC = () => {
   const dispatch = useDispatch();
-  const countries = useSelector((state: RootState) => state.countries.countries); // Получение списка стран
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
-    resolver: yupResolver(validationScheme)
+  const countries = useSelector(
+    (state: RootState) => state.countries.countries,
+  ); // Получение списка стран
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(validationScheme),
   });
   const [pictureBase64, setPictureBase64] = useState<string>('');
   const [imageError, setImageError] = useState<string>('');
@@ -51,12 +57,12 @@ const ControlledFormPage: React.FC = () => {
 
   const onSubmit = (data: FormData) => {
     if (imageError) {
-      alert("Ошибка в изображении: " + imageError);
+      alert('Ошибка в изображении: ' + imageError);
       return;
     }
     const formData = {
       ...data,
-      picture: pictureBase64
+      picture: pictureBase64,
     };
     dispatch(setControlledFormData(formData));
   };
@@ -65,32 +71,32 @@ const ControlledFormPage: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>
         <span>Имя:</span>
-        <input {...register("name")} type="text" />
+        <input {...register('name')} type="text" />
         {errors.name && <p>{errors.name.message}</p>}
       </label>
       <label>
         <span>Возраст:</span>
-        <input {...register("age")} type="number" />
+        <input {...register('age')} type="number" />
         {errors.age && <p>{errors.age.message}</p>}
       </label>
       <label>
         <span>Email:</span>
-        <input {...register("email")} type="email" />
+        <input {...register('email')} type="email" />
         {errors.email && <p>{errors.email.message}</p>}
       </label>
       <label>
         <span>Пароль:</span>
-        <input {...register("password")} type="password" />
+        <input {...register('password')} type="password" />
         {errors.password && <p>{errors.password.message}</p>}
       </label>
       <label>
         <span>Подтвердите Пароль:</span>
-        <input {...register("confirmPassword")} type="password" />
+        <input {...register('confirmPassword')} type="password" />
         {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
       </label>
       <label>
         <span>Пол:</span>
-        <select {...register("gender")}>
+        <select {...register('gender')}>
           <option value="male">Мужской</option>
           <option value="female">Женский</option>
           <option value="other">Другое</option>
@@ -98,12 +104,12 @@ const ControlledFormPage: React.FC = () => {
       </label>
       <label>
         <span>Согласие с условиями:</span>
-        <input {...register("termsAccepted")} type="checkbox" />
+        <input {...register('termsAccepted')} type="checkbox" />
         {errors.termsAccepted && <p>{errors.termsAccepted.message}</p>}
       </label>
       <label>
         <span>Страна:</span>
-        <input {...register("country")} list="countries-list" type="text" />
+        <input {...register('country')} list="countries-list" type="text" />
         <datalist id="countries-list">
           {countries.map((country, index) => (
             <option key={index} value={country} />
@@ -113,7 +119,11 @@ const ControlledFormPage: React.FC = () => {
       </label>
       <label>
         <span>Загрузите изображение:</span>
-        <input type="file" accept="image/png, image/jpeg" onChange={handlePictureChange} />
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          onChange={handlePictureChange}
+        />
         {imageError && <p>{imageError}</p>}
       </label>
       <button type="submit">Отправить</button>

@@ -20,7 +20,7 @@ module.exports = {
   plugins: ['react-refresh'],
   settings: {
     react: {
-      version: "detect",
+      version: 'detect',
     },
   },
   rules: {

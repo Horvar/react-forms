@@ -7,7 +7,28 @@ function MainPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const countriesList = ['Страна 1', 'Страна 2', 'Страна 3'];
+    const countriesList = [
+      'United States',
+      'China',
+      'India',
+      'Russia',
+      'Brazil',
+      'Canada',
+      'Australia',
+      'Germany',
+      'United Kingdom',
+      'France',
+      'Italy',
+      'Mexico',
+      'Spain',
+      'Turkey',
+      'South Korea',
+      'Japan',
+      'Argentina',
+      'South Africa',
+      'Saudi Arabia',
+      'Indonesia',
+    ];
     dispatch(setCountries(countriesList));
   }, [dispatch]);
 
@@ -16,8 +37,14 @@ function MainPage() {
       <h1>Главная Страница</h1>
       <nav>
         <ul>
-          <li><Link to="/uncontrolled-form">Неконтролируемая Форма</Link></li>
-          <li><Link to="/controlled-form">Контролируемая Форма (React Hook Form)</Link></li>
+          <li>
+            <Link to="/uncontrolled-form">Неконтролируемая Форма</Link>
+          </li>
+          <li>
+            <Link to="/controlled-form">
+              Контролируемая Форма (React Hook Form)
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>

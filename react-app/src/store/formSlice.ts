@@ -18,7 +18,7 @@ interface FormState {
 
 const initialState: FormState = {
   uncontrolledFormData: null,
-  controlledFormData: null
+  controlledFormData: null,
 };
 
 const formSlice = createSlice({
@@ -34,5 +34,6 @@ const formSlice = createSlice({
   },
 });
 
-export const { setUncontrolledFormData, setControlledFormData } = formSlice.actions;
+export const { setUncontrolledFormData, setControlledFormData } =
+  formSlice.actions;
 export default formSlice.reducer;
